@@ -66,10 +66,6 @@ fit_drug <- function(drug, drop = NULL) {
   d <- DESeq(d[rowSums(counts(d)) >= 10, ], quiet = TRUE)
   r <- as.data.frame(results(d, contrast = c("grp", "Drug", "VEH")))
   r$symbol <- gsub("_[0-9]+$", "", rownames(r))
-  # TempO-Seq probes carry numeric suffixes; keep the best-expressed
-  # probe per symbol, matching 01_figure1_concentration.R
-  r <- r[order(r$symbol, -r$baseMean), ]
-  r <- r[!duplicated(r$symbol), ]
   attr(r, "n") <- c(sum(mm$grp == "Drug"), sum(mm$grp == "VEH"))
   r
 }
