@@ -59,7 +59,7 @@ dodge <- position_dodge(width = 0.60)
 
 cap <- paste(
   "Discovery n = 3 vs 12 wells; independent human n = 3 vs 22 wells; rat n = 9 vs 32 arrays.",
-  "Bars are unadjusted 95% intervals; open symbols indicate FDR-adjusted p \u2265 0.05.",
+  "Bars are unadjusted 95% intervals; open symbols indicate FDR-adjusted p >= 0.05.",
   sep = "\n")
 
 fig2 <- ggplot(d, aes(logFC, symbol,
