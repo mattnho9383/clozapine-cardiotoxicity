@@ -94,6 +94,11 @@ Rscript R/09_faers_tables.R
 Scripts 01–08 download their inputs from GEO on first run. Script 09 reads the
 workbooks in `data/faers/` and requires `readxl`.
 
+Scripts 03, 04 and 06 read the full GSE244740 count matrix (44,154 × 3,072) and
+require roughly 32–64 GB of memory. On a shared cluster, run them through the
+scheduler rather than on a login node.
+
+`09_faers_tables.R` ends with assertions against the published values — 1,558
 `09_faers_tables.R` ends with assertions against the published values — 1,558
 myocarditis cases, 1,097 with a primary-suspect record, 122 deaths, 852
 hospitalisations, ROR 35.45, IC 4.79, and all four Evans criteria satisfied for
