@@ -1,1 +1,4 @@
 *.bak
+data/GSE*
+data/GPL*
+log_*.txt
