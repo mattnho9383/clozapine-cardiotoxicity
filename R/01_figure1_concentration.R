@@ -12,7 +12,7 @@
 # plate files download. Later runs skip both.
 # =============================================================================
 
-WORKDIR <- file.path(path.expand("~"), "clozapine")
+WORKDIR <- getwd()
 DATA    <- file.path(WORKDIR, "data")
 RES     <- file.path(WORKDIR, "results")
 FIGS    <- file.path(WORKDIR, "figures")

@@ -14,7 +14,7 @@
 #   Rscript 03_figure2.R 2>&1 | tee logs/fig2.log
 # =============================================================================
 
-WORKDIR <- Sys.getenv("CLOZ_HOME", unset = file.path(path.expand("~"), "clozapine"))
+WORKDIR <- getwd()
 DATA <- file.path(WORKDIR, "data"); RES <- file.path(WORKDIR, "results")
 FIGS <- file.path(WORKDIR, "figures")
 for (d in c(RES, FIGS)) dir.create(d, recursive = TRUE, showWarnings = FALSE)

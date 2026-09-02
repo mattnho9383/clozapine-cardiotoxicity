@@ -8,7 +8,7 @@
 #   Rscript 02_figure2_discover.R 2>&1 | tee logs/fig2_discover.log
 # =============================================================================
 
-WORKDIR <- Sys.getenv("CLOZ_HOME", unset = file.path(path.expand("~"), "clozapine"))
+WORKDIR <- getwd()
 DATA    <- file.path(WORKDIR, "data")
 dir.create(DATA, recursive = TRUE, showWarnings = FALSE)
 options(timeout = 1800)

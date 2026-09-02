@@ -18,7 +18,7 @@
 #     which also stops the legend overflowing the panel width
 # =============================================================================
 
-WORKDIR <- Sys.getenv("CLOZ_HOME", unset = file.path(path.expand("~"), "clozapine"))
+WORKDIR <- getwd()
 RES  <- file.path(WORKDIR, "results"); FIGS <- file.path(WORKDIR, "figures")
 lib <- Sys.getenv("R_LIBS_USER", unset = file.path(path.expand("~"), "Rlibs", "R-4.6.0"))
 if (dir.exists(lib)) .libPaths(c(lib, .libPaths()))

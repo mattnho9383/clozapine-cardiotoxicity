@@ -13,7 +13,7 @@
 #   Rscript 07_figureS1_pca.R 2>&1 | tee logs/figS1.log
 # =============================================================================
 
-WORKDIR <- Sys.getenv("CLOZ_HOME", unset = file.path(path.expand("~"), "clozapine"))
+WORKDIR <- getwd()
 DATA <- file.path(WORKDIR, "data"); RES <- file.path(WORKDIR, "results")
 FIGS <- file.path(WORKDIR, "figures")
 lib <- Sys.getenv("R_LIBS_USER", unset = file.path(path.expand("~"), "Rlibs", "R-4.6.0"))

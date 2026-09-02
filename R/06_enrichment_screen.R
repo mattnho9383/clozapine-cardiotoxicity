@@ -21,7 +21,7 @@
 # agreement or disagreement is visible without cross-referencing by hand.
 # =============================================================================
 
-WORKDIR <- Sys.getenv("CLOZ_HOME", unset = file.path(path.expand("~"), "clozapine"))
+WORKDIR <- getwd()
 DATA <- file.path(WORKDIR, "data"); RES <- file.path(WORKDIR, "results")
 FIGS <- file.path(WORKDIR, "figures")
 for (d in c(RES, FIGS)) dir.create(d, recursive = TRUE, showWarnings = FALSE)

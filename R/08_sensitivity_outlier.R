@@ -14,7 +14,7 @@
 #   Rscript 08_sensitivity_outlier.R 2>&1 | tee logs/sensitivity.log
 # =============================================================================
 
-WORKDIR <- Sys.getenv("CLOZ_HOME", unset = file.path(path.expand("~"), "clozapine"))
+WORKDIR <- getwd()
 DATA <- file.path(WORKDIR, "data"); RES <- file.path(WORKDIR, "results")
 lib <- Sys.getenv("R_LIBS_USER", unset = file.path(path.expand("~"), "Rlibs", "R-4.6.0"))
 if (dir.exists(lib)) .libPaths(c(lib, .libPaths()))
