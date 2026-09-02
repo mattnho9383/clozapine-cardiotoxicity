@@ -2,10 +2,11 @@
 
 Analysis code and derived results for:
 
-> Nho M, Singh AP, Abdel-Latif A. *Clozapine-associated cardiotoxicity is not
-> accompanied by cardiomyocyte contractile gene engagement: an integrated
-> pharmacovigilance and cross-species transcriptomic analysis.*
+> Nho M, Abdel-Latif A, Singh AP. *Clozapine-associated cardiac safety signals are
+> not mirrored by contractile gene engagement in a human cardiomyocyte model.*
 > [journal, year, DOI once available]
+
+Code archived at https://doi.org/10.5281/zenodo.22255746
 
 The study pairs disproportionality analysis of the FDA Adverse Event Reporting
 System with transcriptomic analysis of human iPSC-derived cardiomyocytes exposed
@@ -61,6 +62,7 @@ figures/    Figures 1, 2 and S1 as vector PDF and raster PNG
 
 | Script | Produces |
 |---|---|
+| `00_download_geo.R` | Downloads the public GEO inputs. Run once before 01–09 |
 | `01_figure1_concentration.R` | Concentration–response for the nine clozapine genes (Fig. 1) |
 | `02_figure2_discover.R` | Discovery effect sizes for cross-species comparison |
 | `03_figure2.R` | Validation in GSE244740 and GSE59905 |
@@ -70,6 +72,7 @@ figures/    Figures 1, 2 and S1 as vector PDF and raster PNG
 | `07_figureS1_pca.R` | Per-plate principal component analysis (Fig. S1) |
 | `08_sensitivity_outlier.R` | Vehicle-well sensitivity analysis (plate 16, well B02) |
 | `09_faers_tables.R` | Tables 1, 2 and S2 from the FAERS extractions |
+| `check_con_direction.R` | Verifies the direction of the GSE244740 concentration series |
 | `clozapine_reanalysis.ipynb` | Interactive notebook from which several analyses were originally run |
 
 ---
@@ -80,6 +83,7 @@ figures/    Figures 1, 2 and S1 as vector PDF and raster PNG
 module load R/4.6.0
 export R_LIBS_USER=$HOME/Rlibs/R-4.6.0
 
+Rscript R/00_download_geo.R
 Rscript R/01_figure1_concentration.R
 Rscript R/02_figure2_discover.R
 Rscript R/03_figure2.R
@@ -91,14 +95,10 @@ Rscript R/08_sensitivity_outlier.R
 Rscript R/09_faers_tables.R
 ```
 
-Scripts 01–08 download their inputs from GEO on first run. Script 09 reads the
-workbooks in `data/faers/` and requires `readxl`.
+Run `00_download_geo.R` once to fetch the GEO inputs (~230 MB); scripts 01–08 then
+read them from `data/`. Script 09 reads the workbooks in `data/faers/` and requires
+`readxl`.
 
-Scripts 03, 04 and 06 read the full GSE244740 count matrix (44,154 × 3,072) and
-require roughly 32–64 GB of memory. On a shared cluster, run them through the
-scheduler rather than on a login node.
-
-`09_faers_tables.R` ends with assertions against the published values — 1,558
 `09_faers_tables.R` ends with assertions against the published values — 1,558
 myocarditis cases, 1,097 with a primary-suspect record, 122 deaths, 852
 hospitalisations, ROR 35.45, IC 4.79, and all four Evans criteria satisfied for
@@ -140,15 +140,6 @@ describing the operation. The deduplication is therefore fully auditable and
 reversible from the deposited files, even though the code that performed it is
 not included.
 
-### Multi-probe genes
-
-The TempO-Seq panel carries more than one probe for some genes; *EGLN3*, for
-example, is represented by both `EGLN3_88861` and `EGLN3_90114` on plate 16.
-Where several probes mapped to one gene symbol, the probe with the highest mean
-normalized expression was retained. This rule is applied identically in
-`01_figure1_concentration.R`, `06_enrichment_screen.R` and
-`08_sensitivity_outlier.R`.
-
 **4. Table construction — scripted.** `09_faers_tables.R` takes the deduplicated
 workbooks and produces Tables 1, 2 and S2, including all disproportionality
 statistics. Every parsing rule in it was validated against the published tables
@@ -177,6 +168,17 @@ script and reproduce the published values exactly.
 
 ---
 
+## Multi-probe genes in the TempO-Seq panel
+
+The panel carries more than one probe for some genes; *EGLN3*, for example, is
+represented by both `EGLN3_88861` and `EGLN3_90114` on plate 16. Where several
+probes mapped to one gene symbol, the probe with the highest mean normalized
+expression was retained. This rule is applied identically in
+`01_figure1_concentration.R`, `06_enrichment_screen.R` and
+`08_sensitivity_outlier.R`.
+
+---
+
 ## Environment
 
 | Component | Version |
@@ -186,7 +188,7 @@ script and reproduce the published values exactly.
 | BLAS / LAPACK | FlexiBLAS, NETLIB backend; LAPACK 3.12.1 |
 | Bioconductor | 3.23 |
 | DESeq2 | 1.52.0 |
-| limma | [VERSION] |
+| limma | 3.68.5 |
 | ggplot2 | 4.0.3 |
 | msigdbr | 26.1.1 |
 | MSigDB release | as bundled with msigdbr 26.1.1 |
@@ -206,11 +208,11 @@ pinned above and stated in Supplementary Table S1.
 ## Citation
 
 If you use this code, please cite the paper above. The archived release carries
-its own DOI: [ZENODO DOI].
+its own DOI: https://doi.org/10.5281/zenodo.22255746
 
 ## License
 
-[LICENSE — MIT or CC-BY-4.0 recommended for analysis code]
+MIT. See `LICENSE`.
 
 ## Contact
 
